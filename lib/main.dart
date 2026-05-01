@@ -38,7 +38,7 @@ class TokoPintarApp extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           color: Colors.white,
           elevation: 4,
           shadowColor: Colors.black.withOpacity(0.05),
