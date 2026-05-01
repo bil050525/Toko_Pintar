@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import './screens/home_screen.dart';
+import './screens/product_detail_screen.dart';
 import './providers/product_provider.dart';
 
 void main() {
@@ -56,6 +57,9 @@ class TokoPintarApp extends StatelessWidget {
           ),
         ),
         home: const HomeScreen(),
+        routes: {
+          ProductDetailScreen.routeName: (ctx) => const ProductDetailScreen(),
+        },
       ),
     );
   }
