@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/product_provider.dart';
 import '../widgets/product_item.dart';
+import '../screens/admin_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -23,6 +24,32 @@ class HomeScreen extends StatelessWidget {
             },
           ),
         ],
+      ),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            AppBar(
+              title: const Text('Menu Toko'),
+              automaticallyImplyLeading: false,
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.shop),
+              title: const Text('Katalog Belanja'),
+              onTap: () {
+                Navigator.of(context).pushReplacementNamed('/');
+              },
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.edit),
+              title: const Text('Manajemen Toko'),
+              onTap: () {
+                Navigator.of(context).pushNamed(AdminScreen.routeName);
+              },
+            ),
+          ],
+        ),
       ),
       body: products.isEmpty
           ? const Center(child: Text('Belum ada produk.'))

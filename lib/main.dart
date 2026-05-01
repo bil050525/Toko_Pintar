@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 
 import './screens/home_screen.dart';
 import './screens/product_detail_screen.dart';
+import './screens/admin_screen.dart';
+import './screens/edit_product_screen.dart';
 import './providers/product_provider.dart';
 
 void main() {
@@ -59,6 +61,8 @@ class TokoPintarApp extends StatelessWidget {
         home: const HomeScreen(),
         routes: {
           ProductDetailScreen.routeName: (ctx) => const ProductDetailScreen(),
+          AdminScreen.routeName: (ctx) => const AdminScreen(),
+          EditProductScreen.routeName: (ctx) => const EditProductScreen(),
         },
       ),
     );
