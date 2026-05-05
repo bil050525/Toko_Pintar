@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../providers/product_provider.dart';
 import '../screens/product_detail_screen.dart';
+import '../providers/cart_provider.dart';
+
 
 class ProductItem extends StatelessWidget {
   final String id;
@@ -56,13 +58,36 @@ class ProductItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 4),
-                Text(
-                  'Rp ${product.price.toStringAsFixed(0)}',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Rp ${product.price.toStringAsFixed(0)}',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.shopping_cart, size: 20),
+                      color: Theme.of(context).colorScheme.primary,
+                      onPressed: () {
+                        // Logika menambahkan barang ke keranjang
+                        final cart = Provider.of<CartProvider>(context, listen: false);
+                        cart.addItem(product.id, product.price, product.name);
+                        
+                        // Menampilkan notifikasi (SnackBar)
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Barang ditambahkan ke keranjang!'),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),
