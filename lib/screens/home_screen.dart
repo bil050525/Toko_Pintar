@@ -17,12 +17,32 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('TokoPintar'),
         actions: [
+          Container(
+            width: 160,
+            margin: const EdgeInsets.symmetric(vertical: 8.0),
+            decoration: BoxDecoration(
+              color: Colors.black12,
+              borderRadius: BorderRadius.circular(30.0),
+            ),
+            child: const TextField(
+              decoration: InputDecoration(
+                hintText: 'Cari...',
+                hintStyle: TextStyle(color: Colors.black54),
+                prefixIcon: Icon(Icons.search, color: Colors.black54, size: 20),
+                border: InputBorder.none,
+                isDense: true,
+                contentPadding: EdgeInsets.symmetric(vertical: 9.0),
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
           IconButton(
             icon: const Icon(Icons.shopping_cart_outlined),
             onPressed: () {
               // TODO: Navigasi ke keranjang
             },
           ),
+          const SizedBox(width: 8),
         ],
       ),
       drawer: Drawer(
