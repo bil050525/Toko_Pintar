@@ -7,6 +7,8 @@ import './screens/product_detail_screen.dart';
 import './screens/admin_screen.dart';
 import './screens/edit_product_screen.dart';
 import './providers/product_provider.dart';
+import './providers/cart_provider.dart';
+
 
 void main() {
   runApp(const TokoPintarApp());
@@ -20,6 +22,8 @@ class TokoPintarApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (ctx) => ProductProvider()),
+
+        ChangeNotifierProvider(create: (ctx) => CartProvider()),
       ],
       child: MaterialApp(
         title: 'TokoPintar',
