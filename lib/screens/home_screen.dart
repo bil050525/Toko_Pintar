@@ -29,6 +29,7 @@ class HomeScreen extends StatelessWidget {
                 hintText: 'Cari...',
                 hintStyle: TextStyle(color: Colors.black54),
                 prefixIcon: Icon(Icons.search, color: Colors.black54, size: 20),
+                suffixIcon: Icon(Icons.camera_alt, color: Colors.black54, size: 20),
                 border: InputBorder.none,
                 isDense: true,
                 contentPadding: EdgeInsets.symmetric(vertical: 9.0),
