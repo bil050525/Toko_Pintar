@@ -35,11 +35,10 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 8),
           IconButton(
             icon: const Icon(Icons.shopping_cart_outlined),
             onPressed: () {
-              // TODO: Navigasi ke keranjang
+              Navigator.of(context).pushNamed('/cart');
             },
           ),
           const SizedBox(width: 8),
