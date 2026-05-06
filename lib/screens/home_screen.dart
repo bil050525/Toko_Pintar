@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../providers/product_provider.dart';
 import '../widgets/product_item.dart';
@@ -24,12 +25,17 @@ class HomeScreen extends StatelessWidget {
               color: Colors.black12,
               borderRadius: BorderRadius.circular(30.0),
             ),
-            child: const TextField(
+            child: TextField(
               decoration: InputDecoration(
                 hintText: 'Cari...',
                 hintStyle: TextStyle(color: Colors.black54),
                 prefixIcon: Icon(Icons.search, color: Colors.black54, size: 20),
-                suffixIcon: Icon(Icons.camera_alt, color: Colors.black54, size: 20),
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.camera_alt, color: Colors.black54, size: 20),
+                  onPressed: () {
+                    _showImageSourceDialog(context);
+                  },
+                ),
                 border: InputBorder.none,
                 isDense: true,
                 contentPadding: EdgeInsets.symmetric(vertical: 9.0),
@@ -84,6 +90,44 @@ class HomeScreen extends StatelessWidget {
               ),
               itemBuilder: (ctx, i) => ProductItem(products[i].id),
             ),
+    );
+  }
+    void _showImageSourceDialog(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ListTile(
+            leading: const Icon(Icons.camera_alt),
+            title: const Text('Kamera'),
+            onTap: () async {
+              Navigator.of(ctx).pop();
+              final picker = ImagePicker();
+              final image = await picker.pickImage(source: ImageSource.camera);
+              if (image != null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Gambar berhasil diambil: ${image.name}')),
+                );
+              }
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.image),
+            title: const Text('Galeri'),
+            onTap: () async {
+              Navigator.of(ctx).pop();
+              final picker = ImagePicker();
+              final image = await picker.pickImage(source: ImageSource.gallery);
+              if (image != null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Gambar dipilih dari galeri: ${image.name}')),
+                );
+              }
+            },
+          ),
+        ],
+      ),
     );
   }
 }
