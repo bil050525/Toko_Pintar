@@ -98,6 +98,35 @@ class HomeScreen extends StatelessWidget {
               ),
               itemBuilder: (ctx, i) => ProductItem(products[i].id),
             ),
+            bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed, 
+        currentIndex: 0, 
+        selectedItemColor: Theme.of(context).colorScheme.primary,
+        unselectedItemColor: Colors.grey,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Beranda',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.receipt_long),
+            label: 'Transaksi',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profil',
+          ),
+        ],
+        onTap: (index) {
+          // TODO: Logika untuk berpindah halaman
+          if (index == 1) {
+            // Contoh: Tampilkan pesan saat menu Transaksi diklik
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Halaman Transaksi segera hadir!')),
+            );
+          }
+        },
+      ),
     );
   }
     void _showImageSourceDialog(BuildContext context) {
