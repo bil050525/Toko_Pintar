@@ -48,6 +48,14 @@ class HomeScreen extends StatelessWidget {
               Navigator.of(context).pushNamed('/cart');
             },
           ),
+          IconButton(
+            icon: const Icon(Icons.chat_outlined),
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Fitur Chat segera hadir!')),
+              );
+            },
+          ),
           const SizedBox(width: 8),
         ],
       ),
