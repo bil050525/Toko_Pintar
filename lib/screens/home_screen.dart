@@ -85,19 +85,62 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: products.isEmpty
-          ? const Center(child: Text('Belum ada produk.'))
-          : GridView.builder(
-              padding: const EdgeInsets.all(16.0),
-              itemCount: products.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.75,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-              ),
-              itemBuilder: (ctx, i) => ProductItem(products[i].id),
+      body: Column(
+        children: [
+          // INI BAGIAN BARU (Menu Kategori)
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: _buildMenuIcon(Icons.receipt_long, 'Top-up & Tagihan', context, () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Membuka layanan Top-up & Tagihan...')),
+                    );
+                  }),
+                ),
+                Expanded(
+                  child: _buildMenuIcon(Icons.location_on, 'Pilihan Lokal', context, () {
+                    print('Menu Lokal diklik');
+                  }),
+                ),
+                Expanded(
+                  child: _buildMenuIcon(Icons.storefront, 'Pintar Mall', context, () {
+                    print('Menu Mall diklik');
+                  }),
+                ),
+                Expanded(
+                  child: _buildMenuIcon(Icons.grid_view, 'Lihat Semua', context, () {
+                    print('Menu Semua diklik');
+                  }),
+                ),
+              ],
             ),
+          ),
+          
+          const Divider(thickness: 1, height: 1),
+
+          // INI BAGIAN LAMA (Daftar Produk)
+          // Kita bungkus dengan Expanded agar GridView mengambil sisa layar
+          Expanded(
+            child: products.isEmpty
+                ? const Center(child: Text('Belum ada produk.'))
+                : GridView.builder(
+                    padding: const EdgeInsets.all(16.0),
+                    itemCount: products.length,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.75,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                    ),
+                    itemBuilder: (ctx, i) => ProductItem(products[i].id),
+                  ),
+          ),
+        ],
+      ),
             bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed, 
         currentIndex: 0, 
@@ -167,4 +210,29 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-}
+
+    Widget _buildMenuIcon(IconData icon, String label, BuildContext context, VoidCallback onTap) {
+    return InkWell(
+      onTap: onTap, // Menambahkan fungsi klik
+      borderRadius: BorderRadius.circular(15),
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Icon(icon, color: Theme.of(context).colorScheme.primary),
+          ),
+          const SizedBox(height: 5),
+          Text(
+            label,
+            style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+
